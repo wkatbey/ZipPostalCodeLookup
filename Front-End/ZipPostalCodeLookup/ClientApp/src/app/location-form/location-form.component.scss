@@ -1,0 +1,112 @@
+.heading {
+  &.text-center {
+    text-align: center;
+  }
+
+  font-size: 2rem;
+}
+
+.padding-top {
+  padding-top: 1rem;
+}
+
+.form-wrapper {
+  margin-left: 20rem;
+  margin-right: 20rem;
+
+  margin-top: 10rem;
+
+  background-color: white;
+
+  border-radius: 1rem;
+
+  padding: 3rem;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  mat-form-field {
+    display: inline;
+    width: 46%;
+    margin-right: 1.54rem;
+    margin-top: 1rem;
+  }
+}
+
+@media (max-width: 500px) {
+
+  .form-wrapper {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    margin-top: 0.5rem;
+
+    padding: 1rem;
+  }
+
+  .form-container {
+    mat-form-field {
+      display: inline;
+      width: 100%;
+      margin-right: 0;
+      margin-top: 1rem;
+    }
+  }
+}
+
+@media (min-width: 501px) and (max-width: 700px) {
+  .form-wrapper {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    margin-top: 0.5rem;
+
+    padding: 2.5rem;
+  }
+
+  .form-container {
+    mat-form-field {
+      display: inline;
+      width: 100%;
+      margin-right: 0;
+      margin-top: 1rem;
+    }
+  }
+}
+
+@media (min-width: 701px) and (max-width: 1024px) {
+  .form-wrapper {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    margin-top: 0.5rem;
+    padding: 2.5rem;
+  }
+
+  .form-container {
+    mat-form-field {
+      display: inline;
+      width: 45%;
+      margin-right: 1.8rem;
+      margin-top: 1rem;
+    }
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1400px) {
+  .form-wrapper {
+    margin-left: 3rem;
+    margin-right: 3rem;
+    margin-top: 3rem;
+    padding: 2.5rem;
+  }
+
+  .form-container {
+    mat-form-field {
+      display: inline;
+      width: 45%;
+      margin-right: 1.5rem;
+      margin-top: 1rem;
+    }
+  }
+}

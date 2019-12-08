@@ -19,13 +19,17 @@
 
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Compile Remove="ClientApp\src\app\location-form\services\**" />
     <Content Remove="$(SpaRoot)**" />
+    <Content Remove="ClientApp\src\app\location-form\services\**" />
+    <EmbeddedResource Remove="ClientApp\src\app\location-form\services\**" />
     <None Remove="$(SpaRoot)**" />
+    <None Remove="ClientApp\src\app\location-form\services\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="ClientApp\src\app\location-form\services\zip-postal-code-lookup.service.ts" />
+    <None Remove="ClientApp\src\app\location-form\validators\location-validator.ts" />
     <None Remove="ClientApp\src\app\models\address.ts" />
     <None Remove="ClientApp\src\app\models\us-state.ts" />
     <None Remove="ClientApp\src\app\models\zip-postal-code-lookup-request-wrapper.ts" />
@@ -34,7 +38,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <TypeScriptCompile Include="ClientApp\src\app\location-form\services\zip-postal-code-lookup.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\location-form\validators\location-validator.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\address.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\us-state.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\zip-postal-code-lookup-request-wrapper.ts" />

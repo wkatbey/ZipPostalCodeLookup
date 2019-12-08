@@ -1,13 +1,22 @@
-.heading {
-  &.text-center {
-    text-align: center;
-  }
+.text-center {
+  text-align: center;
+}
 
+.heading {
   font-size: 2rem;
+}
+
+.result {
+  font-size: 1.7rem;
+  font-weight: 300;
 }
 
 .padding-top {
   padding-top: 1rem;
+}
+
+.padding-top-2 {
+  padding-top: 2rem;
 }
 
 .form-wrapper {
@@ -21,6 +30,8 @@
   border-radius: 1rem;
 
   padding: 3rem;
+
+  height: 37rem;
 }
 
 .form-container {
@@ -37,6 +48,13 @@
 }
 
 @media (max-width: 500px) {
+  .heading {
+    font-size: 1.6rem;
+  }
+
+  .result {
+    font-size: 1.3rem;
+  }
 
   .form-wrapper {
     margin-left: 0.5rem;
@@ -44,6 +62,8 @@
     margin-top: 0.5rem;
 
     padding: 1rem;
+
+    height: 50rem;
   }
 
   .form-container {
@@ -75,11 +95,11 @@
   }
 }
 
-@media (min-width: 701px) and (max-width: 1024px) {
+@media (min-width: 701px) and (max-width: 900px) {
   .form-wrapper {
     margin-left: 0.5rem;
     margin-right: 0.5rem;
-    margin-top: 0.5rem;
+    margin-top: 4rem;
     padding: 2.5rem;
   }
 
@@ -93,12 +113,49 @@
   }
 }
 
-@media (min-width: 1025px) and (max-width: 1400px) {
+@media (min-width: 901px) and (max-width: 1024px) {
   .form-wrapper {
-    margin-left: 3rem;
-    margin-right: 3rem;
-    margin-top: 3rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    margin-top: 6rem;
     padding: 2.5rem;
+  }
+
+  .form-container {
+    mat-form-field {
+      display: inline;
+      width: 45%;
+      margin-right: 1.8rem;
+      margin-top: 1rem;
+    }
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1200px) {
+  .form-wrapper {
+    margin-left: 2rem;
+    margin-right: 2rem;
+    margin-top: 6rem;
+    padding: 3rem;
+  }
+
+  .form-container {
+    mat-form-field {
+      display: inline;
+      width: 45%;
+      margin-right: 1.5rem;
+      margin-top: 1rem;
+    }
+  }
+}
+
+
+@media (min-width: 1201px) and (max-width: 1500px) {
+  .form-wrapper {
+    margin-left: 10rem;
+    margin-right: 10rem;
+    margin-top: 6rem;
+    padding: 3rem;
   }
 
   .form-container {

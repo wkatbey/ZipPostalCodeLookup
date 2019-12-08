@@ -5,7 +5,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.environment = {
     production: false,
-    baseUrl: ''
+    baseUrl: 'https://localhost:5001/'
 };
 /*
  * In development mode, to ignore zone related error stack frames such as

@@ -1,53 +1,58 @@
 <div class="form-wrapper">
-  <form [formGroup]="locationForm">
+  <form [formGroup]="locationForm" (submit)="getZipPostalCodeByAddress()">
     <div class="text-center">
       <img class="padding-top" src="https://img.icons8.com/nolan/64/000000/worldwide-location.png">
-      <p class="heading padding-top">What's My Postal Code?</p>
+      <p class="heading padding-top">What's My Zipcode?</p>
     </div>
     <div class="padding-top form-container">
-  
-          <mat-form-field>
-            <input matInput
-                   placeholder="Address (Line 1)"
-                   formControlName="addressFirstLine"
-                   (blur)="getZipcodeByAddress()">
-          </mat-form-field>
-
-
-          <mat-form-field>
-            <input matInput
-                   placeholder="Address (Line 2)"
-                   formControlName="addressSecondLine"
-                   (blur)="getZipcodeByAddress()">
-          </mat-form-field>
-
- 
-          <mat-form-field>
-            <input matInput
-                   placeholder="City"
-                   formControlName="city"
-                   (blur)="getZipcodeByAddress()">
-          </mat-form-field>
-  
-          <mat-form-field>
-            <mat-label>State</mat-label>
-            <select matNativeControl
-                    formControlName="state"
-                    (blur)="getZipcodeByAddress()"
-                    required>
-              <option *ngFor="let state of states" [ngValue]="state">
-                {{state.name}}
-              </option>
-            </select>
-          </mat-form-field>
-      
+      <mat-form-field>
+        <input matInput
+                placeholder="Address (Line 1)"
+                formControlName="addressFirstLine">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput
+                placeholder="Address (Line 2)"
+                formControlName="addressSecondLine">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput
+                placeholder="City"
+                formControlName="city">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>State</mat-label>
+        <select matNativeControl
+                formControlName="state"
+                required>
+          <option *ngFor="let state of states" [ngValue]="state">
+            {{state.name}}
+          </option>
+        </select>
+      </mat-form-field>
     </div>
     <div class="padding-top">
       <button mat-stroked-button type="submit" color="primary">Find My Postal Code!</button>
-      <br /><br />
+      
       <mat-error *ngIf="locationForm.errors?.locationInvalid">The location is invalid</mat-error>
     </div>
-    <br>
+
+    <div class="padding-top-2">
+      <p *ngIf="resultLoading">
+        <mat-progress-spinner [diameter]="35"
+                              [color]="primary"
+                              [mode]="loadingMode"></mat-progress-spinner>
+      </p>
+
+      <p class="result" *ngIf="zipcodeResult && !resultLoading">
+        <img src="https://img.icons8.com/nolan/64/000000/user-location.png">
+        {{ zipcodeResult.zipcode }}
+      </p>
+      <p class="result" *ngIf="!zipcodeResult && !resultLoading">
+        <img src="https://img.icons8.com/nolan/64/000000/user-location.png">
+        Your Zipcode Displays Here
+      </p>
+    </div>
   </form>
 </div>
 

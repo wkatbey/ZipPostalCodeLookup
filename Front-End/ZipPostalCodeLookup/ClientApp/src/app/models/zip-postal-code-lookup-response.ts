@@ -11,9 +11,11 @@ export class ZipPostalCodeLookupResponse {
 
     let jsonResponse: any = this.xmlToJson.xmlToJson(xml);
 
-    this.zipcode = jsonResponse.ZipCodeLookupResponse.Address.Zip5;
+    let zip5 = jsonResponse.ZipCodeLookupResponse.Address.Zip5;
+    let zip4 = jsonResponse.ZipCodeLookupResponse.Address.Zip4;
+
+    this.zipcode = zip5 + ' - ' + zip4;
   }
 
-  zipcode: number;
-  postalCode: number;
+  zipcode: string;
 }

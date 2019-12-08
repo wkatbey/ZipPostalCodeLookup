@@ -5,8 +5,9 @@ import { UsState } from '../models/us-state';
 import { ZipPostalCodeLookupService } from '../services/zip-postal-code-lookup.service';
 import { ZipPostalCodeLookupResponse } from '../models/zip-postal-code-lookup-response';
 import { UsStateService } from '../services/us-state.service';
-import { Subscription, Observable } from 'rxjs';
+import { Subscription, Observable, Subject } from 'rxjs';
 import { LocationValidator } from './validators/location-validator';
+import { startWith, filter, take, map } from 'rxjs/operators';
 
 
 @Component({
@@ -21,18 +22,23 @@ export class LocationFormComponent implements OnInit {
       addressFirstLine: ['', Validators.required],
       addressSecondLine: [''],
       city: ['', Validators.required],
-      state: ['', Validators.required],
-      zipcode: [''],
+      state: ['', Validators.required]
     },
     {
       asyncValidators: LocationValidator.locationExists(this.ZipPostalCodeLookupService),
-      updateOn: 'blur'
+      updateOn: 'submit'
     }
   );
 
   statesSubscription: Subscription;
   states$: Observable<UsState[]>;
   states: UsState[];
+
+  zipcodeResult: ZipPostalCodeLookupResponse;
+
+  resultLoading: boolean;
+
+  loadingMode = 'indeterminate';
 
   constructor(
     private fb: FormBuilder,
@@ -49,7 +55,9 @@ export class LocationFormComponent implements OnInit {
     this.statesSubscription.unsubscribe();
   }
 
-  getZipcodeByAddress() {
+  getZipPostalCodeByAddress() {
+    this.resultLoading = true;
+
     let locationForm = this.locationForm;
     let locationFormValue = locationForm.value;
 
@@ -60,16 +68,24 @@ export class LocationFormComponent implements OnInit {
       locationFormValue.state
     );
 
-    if ((address.addressFirstLine || address.addressSecondLine)
-      && address.city && address.state) {
+    let formValidationIndicator$ = this.locationForm.statusChanges.pipe(
+      startWith(this.locationForm.status),
+      filter(status => status !== 'PENDING'),
+      take(1),
+      map(status => {
+        if (status === 'INVALID') {
+          this.resultLoading = false;
+        }
+        return status;
+      }),
+      filter(status => status === 'VALID')
+    );
 
-
-      return this.ZipPostalCodeLookupService.getZipcodeByAddress(address).subscribe(response => {
-        let zipcode = new ZipPostalCodeLookupResponse(response).zipcode;
-
-        locationForm.patchValue({ 'zipcode': zipcode });
+    formValidationIndicator$.subscribe(formValid => {
+      this.ZipPostalCodeLookupService.getZipcodeByAddress(address).subscribe(response => {
+        this.zipcodeResult = new ZipPostalCodeLookupResponse(response);
+        this.resultLoading = false;
       });
-    }
+    });
   }
-
 }

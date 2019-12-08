@@ -3,3 +3,6 @@
 ################################################################################
 
 /Back-End/.vs/ZipPostalCodeLookupService/v15/Server/sqlite3
+/.vs
+/Back-End/.vs/ZipPostalCodeLookupService
+/Back-End/ZipPostalCodeLookupService/bin/Debug/netcoreapp2.2

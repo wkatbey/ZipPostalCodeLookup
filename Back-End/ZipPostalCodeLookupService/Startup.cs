@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using ZipPostalCodeLookupService.Services;
 
 namespace ZipPostalCodeLookupService
 {
@@ -22,9 +23,31 @@ namespace ZipPostalCodeLookupService
 
         public IConfiguration Configuration { get; }
 
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy(MyAllowSpecificOrigins,
+                builder =>
+                {
+                    builder.WithOrigins(
+                        new string[]
+                        {
+                        "https://localhost:44356",
+                        "http://localhost:4200",
+                        "https://whats-my-zipcode.azurewebsites.net"
+                        }
+                    )
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+                });
+            });
+
+            services.AddHttpClient<IZipLookupService, ZipLookupService>();
+            services.AddSingleton<ZipLookupService>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
@@ -41,6 +64,7 @@ namespace ZipPostalCodeLookupService
                 app.UseHsts();
             }
 
+            app.UseCors(MyAllowSpecificOrigins);
             app.UseHttpsRedirection();
             app.UseMvc();
         }

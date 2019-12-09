@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "ZipPostalCodeLookupService": {
+    "ZipCodeLookup": {
       "commandName": "Project",
       "launchBrowser": false,
       "launchUrl": "",

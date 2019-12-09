@@ -1,18 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace ZipPostalCodeLookupService.Services
+namespace ZipCodeLookup.Services
 {
-    public class ZipLookupService : IZipLookupService
+    public class ZipCodeLookupService : IZipCodeLookupService
     {
         private readonly IHttpClientFactory _clientFactory;
         private readonly string _baseUrl = "https://secure.shippingapis.com/ShippingAPI.dll?API=ZipCodeLookup&XML=";
 
-        public ZipLookupService(IHttpClientFactory clientFactory)
+        public ZipCodeLookupService(IHttpClientFactory clientFactory)
         {
             _clientFactory = clientFactory;
         }
@@ -33,7 +30,7 @@ namespace ZipPostalCodeLookupService.Services
         }
     }
 
-    public interface IZipLookupService
+    public interface IZipCodeLookupService
     {
 
     }

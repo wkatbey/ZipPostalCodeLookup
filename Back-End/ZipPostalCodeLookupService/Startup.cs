@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using ZipPostalCodeLookupService.Services;
+using ZipCodeLookup.Services;
 
-namespace ZipPostalCodeLookupService
+namespace ZipCodeLookup
 {
     public class Startup
     {
@@ -46,8 +39,8 @@ namespace ZipPostalCodeLookupService
                 });
             });
 
-            services.AddHttpClient<IZipLookupService, ZipLookupService>();
-            services.AddSingleton<ZipLookupService>();
+            services.AddHttpClient<IZipCodeLookupService, ZipCodeLookupService>();
+            services.AddSingleton<ZipCodeLookupService>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 

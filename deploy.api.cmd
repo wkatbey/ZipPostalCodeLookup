@@ -67,11 +67,11 @@ SET MSBUILD_PATH=%ProgramFiles(x86)%\MSBuild\14.0\Bin\MSBuild.exe
 echo Handling ASP.NET Core Web Application deployment.
 
 :: 1. Restore nuget packages
-call :ExecuteCmd dotnet restore "%DEPLOYMENT_SOURCE%\Back-End\ZipPostalCodeLookupService.sln"
+call :ExecuteCmd dotnet restore "%DEPLOYMENT_SOURCE%\Back-End\ZipCodeLookupAPI.sln"
 IF !ERRORLEVEL! NEQ 0 goto error
 
 :: 2. Build and publish
-call :ExecuteCmd dotnet publish "%DEPLOYMENT_SOURCE%\Back-End\ZipPostalCodeLookupService\ZipPostalCodeLookupService.csproj" --output "%DEPLOYMENT_TEMP%" --configuration Release
+call :ExecuteCmd dotnet publish "%DEPLOYMENT_SOURCE%\Back-End\ZipCodeLookupService\ZipCodeLookup.csproj" --output "%DEPLOYMENT_TEMP%" --configuration Release
 IF !ERRORLEVEL! NEQ 0 goto error
 
 :: 3. KuduSync

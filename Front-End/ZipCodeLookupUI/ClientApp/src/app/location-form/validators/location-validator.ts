@@ -18,10 +18,10 @@ export class LocationValidator {
       if (addressFirstLine && city && state) {
         return zipcodeLookupService.getZipcodeByAddress(address).pipe(
           map(response => {
-            let zipcode = new ZipCodeLookupResponse(response).zipcode;
+            let error = new ZipCodeLookupResponse(response).error;
 
 
-            return zipcode != undefined && zipcode != null ? null : { locationInvalid: true };
+            return error != undefined ? { locationInvalid: true } : null;
           })
         );
       }

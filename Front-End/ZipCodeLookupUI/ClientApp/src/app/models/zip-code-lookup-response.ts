@@ -11,11 +11,17 @@ export class ZipCodeLookupResponse {
 
     let jsonResponse: any = this.xmlToJson.xmlToJson(xml);
 
+  
+
+
+
     let zip5 = jsonResponse.ZipCodeLookupResponse.Address.Zip5;
     let zip4 = jsonResponse.ZipCodeLookupResponse.Address.Zip4;
 
     this.zipcode = zip5 + ' - ' + zip4;
+    this.error = jsonResponse.ZipCodeLookupResponse.Address.Error;
   }
 
   zipcode: string;
+  error: string;
 }

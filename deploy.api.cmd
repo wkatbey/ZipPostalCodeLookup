@@ -60,22 +60,23 @@ IF DEFINED CLEAN_LOCAL_DEPLOYMENT_TEMP (
 IF DEFINED MSBUILD_PATH goto MsbuildPathDefined
 SET MSBUILD_PATH=%ProgramFiles(x86)%\MSBuild\14.0\Bin\MSBuild.exe
 :MsbuildPathDefined
-
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :: Deployment
 :: ----------
 
-echo Handling .NET Web Site deployment.
+echo Handling ASP.NET Core Web Application deployment.
 
-:: 1. Build to the repository path
-call :ExecuteCmd "%MSBUILD_PATH%" "%DEPLOYMENT_SOURCE%\Back-End\ZipCodeLookupAPI.sln" /verbosity:m /nologo %SCM_BUILD_ARGS%
+:: 1. Restore nuget packages
+call :ExecuteCmd dotnet restore "%DEPLOYMENT_SOURCE%\Back-End\ZipCodeLookupAPI.sln"
 IF !ERRORLEVEL! NEQ 0 goto error
 
-:: 2. KuduSync
-IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (
-  call :ExecuteCmd "%KUDU_SYNC_CMD%" -v 50 -f "%DEPLOYMENT_SOURCE%" -t "%DEPLOYMENT_TARGET%" -n "%NEXT_MANIFEST_PATH%" -p "%PREVIOUS_MANIFEST_PATH%" -i ".git;.hg;.deployment;deploy.cmd"
-  IF !ERRORLEVEL! NEQ 0 goto error
-)
+:: 2. Build and publish
+call :ExecuteCmd dotnet publish "%DEPLOYMENT_SOURCE%\Back-End\ZipCodeLookupAPI\ZipCodeLookup.csproj" --output "%DEPLOYMENT_TEMP%" --configuration Release
+IF !ERRORLEVEL! NEQ 0 goto error
+
+:: 3. KuduSync
+call :ExecuteCmd "%KUDU_SYNC_CMD%" -v 50 -f "%DEPLOYMENT_TEMP%" -t "%DEPLOYMENT_TARGET%" -n "%NEXT_MANIFEST_PATH%" -p "%PREVIOUS_MANIFEST_PATH%" -i ".git;.hg;.deployment;deploy.cmd"
+IF !ERRORLEVEL! NEQ 0 goto error
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 goto end

@@ -25,7 +25,7 @@ export class LocationFormComponent implements OnInit {
       state: ['', Validators.required]
     },
     {
-      asyncValidators: LocationValidator.locationExists(this.ZipPostalCodeLookupService),
+      asyncValidators: LocationValidator.locationExists(this.ZipCodeLookupService),
       updateOn: 'submit'
     }
   );
@@ -43,7 +43,7 @@ export class LocationFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private stateService: UsStateService,
-    private ZipPostalCodeLookupService: ZipCodeLookupService) {}
+    private ZipCodeLookupService: ZipCodeLookupService) {}
 
   ngOnInit() {
     this.statesSubscription = this.stateService.getStates().subscribe(states => {
@@ -55,7 +55,7 @@ export class LocationFormComponent implements OnInit {
     this.statesSubscription.unsubscribe();
   }
 
-  getZipPostalCodeByAddress() {
+  getZipCodeByAddress() {
     this.resultLoading = true;
 
     let locationForm = this.locationForm;
@@ -82,7 +82,7 @@ export class LocationFormComponent implements OnInit {
     );
 
     formValidationIndicator$.subscribe(formValid => {
-      this.ZipPostalCodeLookupService.getZipcodeByAddress(address).subscribe(response => {
+      this.ZipCodeLookupService.getZipcodeByAddress(address).subscribe(response => {
         this.zipcodeResult = new ZipCodeLookupResponse(response);
         this.resultLoading = false;
       });

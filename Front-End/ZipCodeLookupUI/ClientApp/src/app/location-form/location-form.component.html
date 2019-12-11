@@ -44,14 +44,18 @@
                               [mode]="loadingMode"></mat-progress-spinner>
       </p>
 
-      <p class="result" *ngIf="zipcodeResult && !resultLoading">
+      <div class="result" *ngIf="zipcodeResult && !resultLoading">
         <img src="https://img.icons8.com/nolan/64/000000/user-location.png">
-        {{ zipcodeResult.zipcode }}
-      </p>
-      <p class="result" *ngIf="!zipcodeResult && !resultLoading">
+        <p class="result-text">
+          {{ zipcodeResult.zipcode }}
+        </p>
+      </div>
+      <div class="result" *ngIf="!zipcodeResult && !resultLoading">
         <img src="https://img.icons8.com/nolan/64/000000/user-location.png">
-        Your Zipcode Displays Here
-      </p>
+        <p class="result-text">
+          Your Zipcode Displays Here
+        </p>
+      </div>
     </div>
   </form>
 </div>

@@ -1,7 +1,7 @@
 import { AbstractControl, Validators, ValidationErrors, ValidatorFn, AsyncValidatorFn, FormGroup } from '@angular/forms';
 import { ZipCodeLookupService } from '../../services/zip-code-lookup.service';
 import { Observable, of, from } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 import { Address } from '../../models/address';
 import { ZipCodeLookupResponse } from '../../models/zip-code-lookup-response';
 
@@ -22,6 +22,9 @@ export class LocationValidator {
 
 
             return error != undefined ? { locationInvalid: true } : null;
+          }),
+          catchError(error => {
+            formGroup.setErrors({ requestError: true });
           })
         );
       }

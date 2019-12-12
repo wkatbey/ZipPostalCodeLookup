@@ -1,3 +1,31 @@
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  &::before {
+    animation: 1s linear infinite spinner;
+    border: solid 0.2rem #fff;
+    border-bottom-color: #f227bc;
+    border-top-color:  #0808ff;
+    border-radius: 50%;
+    content: "";
+    height: 2.3rem;
+    position: absolute;
+    transform: translate3d(-50%, -50%, 0);
+    transform-origin: center;
+    width: 2.3rem;
+    will-change: transform;
+  }
+}
+
+
 mat-error {
   display: inline-block;
   margin-left: 1rem;

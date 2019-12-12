@@ -33,27 +33,37 @@
     </div>
     <div class="padding-top">
       <button mat-stroked-button type="submit" color="primary">Find My Zipcode!</button>
-      
-      <mat-error *ngIf="locationForm.errors?.locationInvalid">The location is invalid</mat-error>
     </div>
-
+    
     <div class="padding-top-2">
-      <p *ngIf="resultLoading">
-        <mat-progress-spinner [diameter]="35"
-                              [color]="primary"
-                              [mode]="loadingMode"></mat-progress-spinner>
-      </p>
+      <div class="spinner" *ngIf="resultLoading"></div>
 
-      <div class="result" *ngIf="zipcodeResult && !resultLoading">
+      <div class="result" *ngIf="zipcodeResult && !resultLoading && !locationForm.errors">
         <img src="https://img.icons8.com/nolan/64/000000/user-location.png">
         <p class="result-text">
           {{ zipcodeResult.zipcode }}
         </p>
       </div>
-      <div class="result" *ngIf="!zipcodeResult && !resultLoading">
+
+      <div class="result" *ngIf="!zipcodeResult && !resultLoading && !locationForm.errors">
         <img src="https://img.icons8.com/nolan/64/000000/user-location.png">
         <p class="result-text">
           Your Zipcode Displays Here
+        </p>
+      </div>
+
+      <div class="result" *ngIf="locationForm.errors?.locationInvalid">
+        <img src="https://img.icons8.com/nolan/64/000000/box-important.png">
+        <p class="result-text">
+          Hmm, this location doesn't seem to exist
+        </p>
+      </div>
+
+
+      <div class="result" *ngIf="locationForm.errors?.requestError">
+        <img src="https://img.icons8.com/nolan/64/000000/box-important.png">
+        <p class="result-text">
+          Oops! Something went wrong
         </p>
       </div>
     </div>

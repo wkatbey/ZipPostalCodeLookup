@@ -31,7 +31,10 @@ namespace ZipCodeLookup
                         {
                         "https://localhost:44356",
                         "http://localhost:4200",
-                        "https://whats-my-zipcode.azurewebsites.net"
+                        "https://whats-my-zipcode.azurewebsites.net",
+                        "http://whats-my-zipcode.azurewebsites.net",
+                        "https://myzipcode.net",
+                        "http://myzipcode.net"
                         }
                     )
                     .AllowAnyHeader()

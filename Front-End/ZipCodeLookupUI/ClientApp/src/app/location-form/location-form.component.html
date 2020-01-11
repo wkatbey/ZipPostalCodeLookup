@@ -1,7 +1,7 @@
 <div class="form-wrapper">
   <form [formGroup]="locationForm" (submit)="getZipCodeByAddress()">
     <div class="text-center">
-      <img class="padding-top" src="https://img.icons8.com/nolan/64/000000/worldwide-location.png">
+      <img class="padding-top" src="https://img.icons8.com/nolan/64/worldwide-location.png">
       <p class="heading padding-top">What's My Zipcode?</p>
     </div>
     <div class="padding-top form-container">
@@ -39,21 +39,21 @@
       <div class="spinner" *ngIf="resultLoading"></div>
 
       <div class="result" *ngIf="zipcodeResult && !resultLoading && !locationForm.errors">
-        <img src="https://img.icons8.com/nolan/64/000000/user-location.png">
+        <img src="https://img.icons8.com/nolan/64/user-location.png">
         <p class="result-text">
           {{ zipcodeResult.zipcode }}
         </p>
       </div>
 
       <div class="result" *ngIf="!zipcodeResult && !resultLoading && !locationForm.errors">
-        <img src="https://img.icons8.com/nolan/64/000000/user-location.png">
+        <img src="https://img.icons8.com/nolan/64/user-location.png">
         <p class="result-text">
           Your Zipcode Displays Here
         </p>
       </div>
 
       <div class="result" *ngIf="locationForm.errors?.locationInvalid">
-        <img src="https://img.icons8.com/nolan/64/000000/box-important.png">
+        <img src="https://img.icons8.com/nolan/64/box-important.png">
         <p class="result-text">
           Hmm, this location doesn't seem to exist
         </p>
@@ -61,7 +61,7 @@
 
 
       <div class="result" *ngIf="locationForm.errors?.requestError">
-        <img src="https://img.icons8.com/nolan/64/000000/box-important.png">
+        <img src="https://img.icons8.com/nolan/64/box-important.png">
         <p class="result-text">
           Oops! Something went wrong
         </p>

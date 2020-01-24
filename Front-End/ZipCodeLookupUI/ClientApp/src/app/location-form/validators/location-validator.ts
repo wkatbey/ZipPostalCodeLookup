@@ -22,9 +22,6 @@ export class LocationValidator {
 
 
             return error != undefined ? { locationInvalid: true } : null;
-          }),
-          catchError(() => {
-            formGroup.setErrors({ requestError: true });
           })
         );
       }
